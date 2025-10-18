@@ -20,15 +20,15 @@ public partial class Register_Page : ContentPage
     public async void Register_(object sender, EventArgs e)
     {
         string gmail = register_gmail_entry.Text?.Trim() ?? "";
-        if (string.IsNullOrEmpty(gmail)) { register_errors_label.Text = "gmail cant be empty"; return; }
-        if (!Is_Gmail_Valid_(gmail)) { register_errors_label.Text = "gmail is invalid"; return; }
+        if (string.IsNullOrEmpty(gmail)) { register_errors_label.Text = "Gmail can't be empty"; return; }
+        if (!Is_Gmail_Valid_(gmail)) { register_errors_label.Text = "Gmail is invalid"; return; }
 
         string password = register_password_entry.Text?.Trim() ?? "";
-        if (string.IsNullOrEmpty(password)) { register_errors_label.Text = "password cant be empty"; return; }
-        if (!Is_Password_Valid_(password)) { register_errors_label.Text = "password is invalid ( must have big and small letter as well as number nad special character)";  return; }
+        if (string.IsNullOrEmpty(password)) { register_errors_label.Text = "Password can't be empty"; return; }
+        if (!Is_Password_Valid_(password)) { register_errors_label.Text = "Password is invalid (must contain big and small letters, a number, and special character)";  return; }
 
         string code = register_code_entry.Text?.Trim() ?? "";
-        if (string.IsNullOrEmpty(code)) { register_errors_label.Text = "code cant be empty"; return; }
+        if (string.IsNullOrEmpty(code)) { register_errors_label.Text = "Code can't be empty"; return; }
 
         var response = await client.PostAsJsonAsync("Auth/Register", new { gmail = gmail, password = password, verification_code = code });
 
@@ -41,8 +41,8 @@ public partial class Register_Page : ContentPage
     public async void Send_Register_Confirmation_Code_(object sender, EventArgs e)
     {
         string gmail = register_gmail_entry.Text?.Trim() ?? "";
-        if (string.IsNullOrEmpty(gmail)) { register_errors_label.Text = "gmail cant be empty"; return; }
-        if (!Is_Gmail_Valid_(gmail)) { register_errors_label.Text = "gmail must be valid"; return; }
+        if (string.IsNullOrEmpty(gmail)) { register_errors_label.Text = "Gmail can't be empty"; return; }
+        if (!Is_Gmail_Valid_(gmail)) { register_errors_label.Text = "Gmail is invalid"; return; }
 
         var response = await client.PostAsJsonAsync("Auth/SentVerificationGmail", new { gmail = gmail });
 
